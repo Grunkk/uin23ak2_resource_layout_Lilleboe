@@ -96,19 +96,16 @@ const resources = [
 ]
 
 function renderResources(){
-    /*let buttonsHTML = ""
+    
+    let printHTML = ""
+    /*lager en tom variabl slik at den kan ta imot dataen fra mapping-en og så derretter skrive ut det til HTML-en*/
 
-    resources.map((button, id) => buttonsHTML += `<button onClick="activateArticle(${id})">${button.category}</button>`)
-
-    document.querySelector("main").innerHTML = buttonsHTML*/
-
-    let articleHTML = ""
-    let buttonHTML = "" 
-
-    resources.map((button, id) => buttonHTML += `
+    resources.map((button, id) => printHTML += `
     <button onClick="activateArticle(${id})" class="inactive" id="button-${id}">${button.category}</button>`)
+    /*kjører en map først for å lage buttons for hvert av objektene i resources arrayen og legger det til i printHTML.
+    Bruker button parameteren til å hente ut category slik at riktig navn står på button-en. id parameteren brukes til å gi hver knapp en unik id slik at jeg senere kan endre på class-en til buttons.*/
 
-    resources.map((article, id) => articleHTML += `
+    resources.map((article, id) => printHTML += `
     <article id="article-${id}" class="hidden">
     <h2>${article.category}</h2>
     <p>${article.text}</p>
@@ -117,17 +114,22 @@ function renderResources(){
         `<li><a href="${links.url}">${links.title}</a></li>`).join("")}
     </ul>
     </article>`)
+    /*Den andre mappen jeg kjører er for å produsere artikkelene og legger det til i printHTML.
+    Den bruker article parameteren til å hente ut dataen fra resources arrayen og putter det i HTML strukturen jeg vil ha.
+    Jeg måtte mappe sources arrayen som er i resources array slik at jeg kan hente ut både title og url fra den.
+    Id parameteren brukes da igjen for å gi en unik id til hver artikkel slik at jeg kan endre class senere i oppgaven. */
 
-    document.querySelector("main").innerHTML += buttonHTML
-    document.querySelector("main").innerHTML += articleHTML
+    document.querySelector("main").innerHTML += printHTML
+    /*Linjen med kode over tar da å skrive ut alt som står i printHTML til main i HTML*/
 
     document.querySelector("button").classList.replace("inactive", "active")
     document.querySelector("article").classList.remove("hidden")
+    /*koden over tar å endrer class-en til det første elemente i HTML strukteren.
+    classlist.replace endrer classes til den første button-en fra inactive til active. classlist.remove fjerner hidden class-en til den første article-en i HTML strukturen.
+    Dette gjør at når du åpner nettsiden for første gang så vil den første artikkelen være synlig.*/
 }
 
 function activateArticle(id){
-   /*document.querySelector("button").classList.remove("active")
-    document.querySelector("article").classList.remove("hidden")*/
     const buttonElements = document.querySelectorAll("button");
     buttonElements.forEach((element) => {
         element.classList.replace("active", "inactive");
@@ -137,10 +139,17 @@ function activateArticle(id){
     articleElements.forEach((element) => {
         element.classList.add('hidden');
     });
-    /*https://codingbeautydev.com/blog/javascript-remove-class-from-multiple-elements/*/
+    /*https://codingbeautydev.com/blog/javascript-remove-class-from-multiple-elements/
+    Slet med å finne en måte å endre class-er på flere elementer samtidig så jeg brukte koden i lenken over til å løse det.
+    Koden over bruker forEach til å gå igjennom alle button og article elementer.
+    Gjennom classlist.replace så erstatter den classen på buttons slik at ingen er "active" og  classlist.add tar da å legger til hidden slik at ingen av artikkelene syntes.
+    Jeg gjør dette slik at når man trykker på en ny artikkel så vil den forrige som var aktivert bli deaktivert slik at den nye som blir trykket på vises*/
 
     document.querySelector("#button-"+id).classList.replace("inactive", "active")
     document.querySelector("#article-"+id).classList.remove("hidden")
+    /*koden over tar imot parameteren "id" slik at det elementet som blir trykket på blir endret.
+    button går fra inactive til active og hidden blir fjernet fra artikkelen slik at artikkelen syntes.
+    Hele activeArticle funksjonen gjør da at først alle buttons og articles blir "deaktivert" og så at den som blir trykket på blir "aktivert".*/
 }
 
 renderResources()
