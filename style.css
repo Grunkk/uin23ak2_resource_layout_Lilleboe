@@ -1,0 +1,100 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;600;700&display=swap');
+
+:root {
+    --teal: #25DFE6;
+    --grey: #707070;
+    --greyBorder: #D3D3D3;
+    --greyBackground: #F5F5F5;
+    --linkTeal: #00C1C9;
+    --white: #FFFFFF;
+    --maxwidth: 1200px;
+}
+
+body {
+    /*font-family: 'Rubik', sans-serif;*/
+    font-family: sans-serif;
+    color: var(--grey);
+    margin-top: 3rem;
+    padding-top: 0;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+div.container {
+    width: 100%;
+    max-width: var(--maxwidth);
+    background-color: var(--white);
+    margin: 0 auto;
+}
+
+header {
+    border: 2px solid var(--greyBorder);
+    padding: 1.5rem;
+}
+
+header h1 {
+    text-transform: uppercase;
+}
+
+main {
+    padding-top: 2rem;
+    position: relative;
+}
+
+main button {
+    background-color: var(--greyBackground);
+    /*font-family: 'Rubik 400', sans-serif;*/
+    font-family: sans-serif;
+    color: var(--grey);
+    font-size: 30px;
+    text-transform: uppercase;
+    border: 2px solid var(--greyBorder);
+    padding: 1.5rem;
+    margin-right: 1rem;
+    margin-top: .5rem;
+    display: inline-block;
+}
+
+main button:hover, button.active {
+    background-color: var(--teal);
+    color: var(--white);
+    border: 2px solid var(--teal);
+}
+
+main article {
+    border: 2px solid var(--greyBorder);
+    border-top: 5px solid var(--teal);
+    display: flex;
+    flex-wrap: wrap;
+    max-width: inherit;
+    width: 100%;
+    position: absolute;
+    flex-direction: column;
+    top: auto;
+    padding-bottom: 3rem;
+}
+
+main article.hidden {
+    visibility: hidden;
+    opacity: 0%;
+}
+
+main article h2 {
+    text-transform: uppercase;
+    padding-left: 1rem;
+}
+
+main article p {
+    width: 60%;
+    padding-left: 1rem;
+}
+
+main article ul {
+    padding-left: 2rem;
+}
+
+main article ul li a{
+    color: var(--linkTeal);
+}
+

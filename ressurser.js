@@ -94,3 +94,53 @@ const resources = [
         ]
     },
 ]
+
+function renderResources(){
+    /*let buttonsHTML = ""
+
+    resources.map((button, id) => buttonsHTML += `<button onClick="activateArticle(${id})">${button.category}</button>`)
+
+    document.querySelector("main").innerHTML = buttonsHTML*/
+
+    let articleHTML = ""
+    let buttonHTML = "" 
+
+    resources.map((button, id) => buttonHTML += `
+    <button onClick="activateArticle(${id})" class="inactive" id="button-${id}">${button.category}</button>`)
+
+    resources.map((article, id) => articleHTML += `
+    <article id="article-${id}" class="hidden">
+    <h2>${article.category}</h2>
+    <p>${article.text}</p>
+    <ul>
+        ${article.sources.map(links => 
+        `<li><a href="${links.url}">${links.title}</a></li>`).join("")}
+    </ul>
+    </article>`)
+
+    document.querySelector("main").innerHTML += buttonHTML
+    document.querySelector("main").innerHTML += articleHTML
+
+    document.querySelector("button").classList.replace("inactive", "active")
+    document.querySelector("article").classList.remove("hidden")
+}
+
+function activateArticle(id){
+   /*document.querySelector("button").classList.remove("active")
+    document.querySelector("article").classList.remove("hidden")*/
+    const buttonElements = document.querySelectorAll("button");
+    buttonElements.forEach((element) => {
+        element.classList.replace("active", "inactive");
+    });
+
+    const articleElements = document.querySelectorAll("article");
+    articleElements.forEach((element) => {
+        element.classList.add('hidden');
+    });
+    /*https://codingbeautydev.com/blog/javascript-remove-class-from-multiple-elements/*/
+
+    document.querySelector("#button-"+id).classList.replace("inactive", "active")
+    document.querySelector("#article-"+id).classList.remove("hidden")
+}
+
+renderResources()
